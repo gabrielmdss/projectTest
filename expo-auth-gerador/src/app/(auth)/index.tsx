@@ -5,6 +5,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Modal } from 'react-na
 import Slider from '@react-native-community/slider';
 import {ModalPassword} from '@/components/modal';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import {Link} from 'expo-router';
 
 
 let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -17,8 +18,8 @@ export default function Home(){
     const [size, setSize] = useState(10)
     const [passwordValue, setPasswordValue] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
-    
-    
+
+
 
     function generatePassword (){
         let password = ''
@@ -39,7 +40,6 @@ export default function Home(){
             <Image source={require('../../assets/logo.png')}/>
 
             <Text style={styles.title}>{size} caracteres</Text>
-            
             <View style={styles.area}>
             <Slider
                 style={{height: 20, padding: 2}}
@@ -62,22 +62,21 @@ export default function Home(){
                 <ModalPassword password={passwordValue} handleClose={() => setModalVisible(false)}/>
             </Modal>
 
-
             <TouchableOpacity onPress={() => signOut()}>
-                <Ionicons name="exit" size={32} color="#3a2bde" />
+                <Ionicons name="exit" size={32} color="#3a2bde"/>
             </TouchableOpacity>
-            
-            
-
-            
         </View>
+
+        
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 32,
+        paddingTop: 32,
+        paddingRight: 32,
+        paddingLeft: 32,
         justifyContent:'center',
         alignItems:'center',
         gap: 12,
@@ -98,8 +97,7 @@ const styles = StyleSheet.create({
         padding: 1
     },
     buttonText: {
-        backgroundColor: "#3a2bde",
-        color: '#FFF',
+        color: '#ecae31',
         fontSize: 20, 
       },
     area: {
@@ -124,5 +122,6 @@ const styles = StyleSheet.create({
         color: '#3a2bde',
         fontSize: 25, 
         fontWeight: 'bold'
-    }
+    },
+    
 })
