@@ -25,6 +25,10 @@ export function ModalPassword ({password, handleClose}){
                 <TouchableOpacity style={styles.button} onPress={handleClose}>
                     <Text style={styles.buttonText}>Voltar</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity style={styles.buttonSave} onPress={handleClose}>
+                    <Text style={styles.buttonText}>Salvar</Text>
+                </TouchableOpacity>
             </View>
             </View>
         </View>
@@ -40,40 +44,54 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     content: {
-        backgroundColor: "#FFF",
-        width: '82%',
+        backgroundColor: "#3a2bde",
+        width: '78%',
         paddingTop: 24,
         paddingBottom: 24,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 8,
+        borderStyle: "solid",
+        borderColor: '#ecae31',
+        borderWidth: 2
     },
     title: {
         fontSize: 20,
         fontWeight: "bold",
-        color: '#000',
+        color: '#ecae31',
         marginBottom: 25,
     },
     innerPassword: {
-        backgroundColor: "#000",
-        width: '90%',
-        padding: 14,
+        backgroundColor: "#ecae31",
+        width: '60%',
+        padding: 10,
         borderRadius: 8,
         
 
     },
     text: {
-        color: '#FFF',
+        color: '#3a2bde',
         textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 20
     },
     buttonArea: {
         flexDirection: "row",
+        width: '45%',
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingTop: 20
     },
-    button: {
-        marginTop: 18,      
-    },
+    
     buttonText: {
         fontWeight: "bold",
-        fontSize: 18
+        fontSize: 18,
+        color:'#ecae31'
+    },
+    buttonSave: {
+        fontWeight: "bold",
+        fontSize: 18,
+        color:'#ecae31'
     }
+    
 })

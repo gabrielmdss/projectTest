@@ -7,17 +7,17 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 7,
-        backgroundColor: '#000',
+        backgroundColor: '#ecae31',
         padding: 22,
         borderRadius: 16,
     },
     icon: {
-        color: '#FFF',
+        color: '#3a2bde',
         fontSize: 20,
     },
     text: {
-        color: '#FFF',
-        fontSize: 16,
+        color: '#3a2bde',
+        fontSize: 18,
 
     },
 })

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Liking from 'expo-linking';
 
@@ -46,7 +46,10 @@ export default function Login() {
     })
  return (
    <View style={styles.container}>
-    <Text style={styles.title}>Entrar</Text>
+    <View>
+    <Text style={styles.text}>Gerador de Senhas</Text>
+    </View>
+    <Image source={require('../../assets/logo.png')} style={{marginBottom: 15}}/>
     <Button 
     icon="logo-google" 
     title="Entrar com Google" 
@@ -62,11 +65,16 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 32,
         justifyContent: 'center',
+        alignItems: 'center',
         gap: 13
-
     },
-    title: {
-        fontSize: 22,
+    text: {
+        color: '#3a2bde',
+        width: '90%',
+        fontSize: 25,
+        marginTop: 30,
+        padding: 25,
         fontWeight: 'bold'
-    },
+    }
+
 })

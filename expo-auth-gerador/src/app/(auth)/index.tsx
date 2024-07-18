@@ -2,8 +2,10 @@ import { useState } from 'react';
 import Button from '@/components/button';
 import { useAuth, useUser } from '@clerk/clerk-expo';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
-import  Slider from '@react-native-community/slider';
-import {ModalPassword} from '@/components/modal'
+import Slider from '@react-native-community/slider';
+import {ModalPassword} from '@/components/modal';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -12,10 +14,11 @@ export default function Home(){
     const { signOut } = useAuth()
     const userName = user?.firstName;
 
+    const [size, setSize] = useState(10)
     const [passwordValue, setPasswordValue] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
     
-    let size = 6;
+    
 
     function generatePassword (){
         let password = ''
@@ -32,11 +35,27 @@ export default function Home(){
 
     return (
         <View style={styles.container}>
-            <Image source={{uri: user?.imageUrl}} style={styles.image}/>
-            <Text style={styles.text}>Olá {userName}</Text>
+
+            <Image source={require('../../assets/logo.png')}/>
+
+            <Text style={styles.title}>{size} caracteres</Text>
+            
+            <View style={styles.area}>
+            <Slider
+                style={{height: 20, padding: 2}}
+                minimumValue={4}
+                maximumValue={10}
+                minimumTrackTintColor="#3a2bde"
+                maximumTrackTintColor="#ecae31"
+                thumbTintColor="#3a2bde"
+                value={size}
+                onValueChange={(value) => setSize(value.toFixed(0)) }
+            />
+            </View>
+            
 
             <TouchableOpacity style={styles.button} onPress={generatePassword}>
-                <Text style={styles.buttonText}>Gerar senha com {size } caracteres</Text>
+                <Text style={styles.buttonText}>Gerar senha</Text>
             </TouchableOpacity>
 
             <Modal visible={modalVisible} animationType='fade' transparent={true}>
@@ -44,9 +63,11 @@ export default function Home(){
             </Modal>
 
 
-            <TouchableOpacity style={styles.button}>
-            <Button icon="exit" title='Sair' onPress={() => signOut()}/>
+            <TouchableOpacity onPress={() => signOut()}>
+                <Ionicons name="exit" size={32} color="#3a2bde" />
             </TouchableOpacity>
+            
+            
 
             
         </View>
@@ -65,15 +86,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold'
     },
-    image: {
-        width: 92,
-        height: 92,
-        borderRadius: 12
-    },
     button: {
-        backgroundColor: '#000',
-        width: '80%',
-        height: 65,
+        backgroundColor: '#3a2bde',
+        width: '50%',
+        height: 45,
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
@@ -82,6 +98,7 @@ const styles = StyleSheet.create({
         padding: 1
     },
     buttonText: {
+        backgroundColor: "#3a2bde",
         color: '#FFF',
         fontSize: 20, 
       },
@@ -89,9 +106,23 @@ const styles = StyleSheet.create({
         marginTop: 14,
         marginBottom: 14,
         width: '80%',
-        backgroundColor: '#000',
+        backgroundColor: '#ecae31',
         borderRadius: 8,
         padding: 1
     },
-    
+    header: {
+        flex: 1,
+        marginTop: 20,
+        alignItems: 'center',
+        width: '100%',
+        height: '100%'
+    },
+    buttonSignOut: {
+        backgroundColor: 'red'
+    },
+    title: {
+        color: '#3a2bde',
+        fontSize: 25, 
+        fontWeight: 'bold'
+    }
 })
