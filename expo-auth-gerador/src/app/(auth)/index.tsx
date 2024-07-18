@@ -12,12 +12,14 @@ export default function Home(){
     const { signOut } = useAuth()
     const userName = user?.firstName;
 
-    const [size, setSize] = useState(4)
     const [passwordValue, setPasswordValue] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
+    
+    let size = 6;
 
     function generatePassword (){
         let password = ''
+        
        
     
         for (let i = 0, n = charset.length; i < size; i++){
@@ -32,18 +34,6 @@ export default function Home(){
         <View style={styles.container}>
             <Image source={{uri: user?.imageUrl}} style={styles.image}/>
             <Text style={styles.text}>Olá {userName}</Text>
-
-            <View style={styles.area}>
-                <Slider
-                style={{ height: 30 }}
-                minimumValue={4}
-                maximumValue={8}
-                thumbTintColor='#FFF'     
-                minimumTrackTintColor='#FFF' 
-                value={size}
-                onValueChange={(value) => setSize(value.toFixed(0)) }   
-                />
-            </View>
 
             <TouchableOpacity style={styles.button} onPress={generatePassword}>
                 <Text style={styles.buttonText}>Gerar senha com {size } caracteres</Text>
