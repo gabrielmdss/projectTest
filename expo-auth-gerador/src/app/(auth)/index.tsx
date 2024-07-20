@@ -3,6 +3,7 @@ import Button from '@/components/button';
 import { useAuth, useUser } from '@clerk/clerk-expo';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Modal } from 'react-native';
 import Slider from '@react-native-community/slider';
+//import { Slider } from '@miblanchard/react-native-slider';
 import {ModalPassword} from '@/components/modal';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {Link} from 'expo-router';
@@ -11,14 +12,18 @@ import {Link} from 'expo-router';
 let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 export default function Home(){
-    const { user } = useUser()
+
     const { signOut } = useAuth()
-    const userName = user?.firstName;
 
     const [size, setSize] = useState(10)
-    const [passwordValue, setPasswordValue] = useState("");
-    const [modalVisible, setModalVisible] = useState(false);
+    const [passwordValue, setPasswordValue] = useState<string>("");
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
 
+    const handleValueChange = (value: number | number[]) => {
+        if (typeof value === 'number') {
+          setSize(Math.round(value));  
+        }
+      };
 
 
     function generatePassword (){
@@ -39,7 +44,7 @@ export default function Home(){
 
             <Image source={require('../../assets/logo.png')}/>
 
-            <Text style={styles.title}>{size} caracteres</Text>
+            <Text style={styles.title}>{size.toFixed(0)} caracteres</Text>
             <View style={styles.area}>
             <Slider
                 style={{height: 20, padding: 2}}
@@ -49,7 +54,7 @@ export default function Home(){
                 maximumTrackTintColor="#ecae31"
                 thumbTintColor="#3a2bde"
                 value={size}
-                onValueChange={(value) => setSize(value.toFixed(0)) }
+                onValueChange={handleValueChange}
             />
             </View>
             
